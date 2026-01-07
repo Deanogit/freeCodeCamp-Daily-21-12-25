@@ -42,23 +42,25 @@ function daylightHours(latitude) {
   const keysArr = Object.keys(latHours);
   console.log(keysArr);
   // two variables, keep track of closestLat & minDifference
-  let closestLat = 0;
-  let minDifference;
+  let closestLat = keysArr[0]; // start by assuming the first key is the winner
+  let minDifference = Infinity; // start with a huge number
 
   // loop through keys
   keysArr.forEach((key) => {
     // // for each key, calculate the absolute difference between it and your latitude
     // // use Math.abs(input - key) to get difference
-    minDifference = Math.abs(latitude - key);
+    const currentDifference = Math.abs(latitude - key);
     console.log(minDifference);
+
     // Update: if current difference is smaller than your minDifference, update your "closest" variables
-    if (minDifference < closestLat) {
-      closestLat = minDifference;
+    if (currentDifference < minDifference) {
+      minDifference = currentDifference; // update the "score to beat"
+      closestLat = key; // save the actual latitude key
     }
   });
 
   console.log(closestLat);
 
-  // return latHours[latitude || latitude - 1 || latitude + 1]
+  return latHours[closestLat];
   //  return latitude;
 }
