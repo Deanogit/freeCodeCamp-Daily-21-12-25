@@ -37,6 +37,28 @@ function daylightHours(latitude) {
     90: 0,
   };
 
-  return latHours[latitude || latitude - 1 || latitude + 1];
-  return latitude;
+  // find the smallest difference from the input
+  // get all keys
+  const keysArr = Object.keys(latHours);
+  console.log(keysArr);
+  // two variables, keep track of closestLat & minDifference
+  let closestLat = 0;
+  let minDifference;
+
+  // loop through keys
+  keysArr.forEach((key) => {
+    // // for each key, calculate the absolute difference between it and your latitude
+    // // use Math.abs(input - key) to get difference
+    minDifference = Math.abs(latitude - key);
+    console.log(minDifference);
+    // Update: if current difference is smaller than your minDifference, update your "closest" variables
+    if (minDifference < closestLat) {
+      closestLat = minDifference;
+    }
+  });
+
+  console.log(closestLat);
+
+  // return latHours[latitude || latitude - 1 || latitude + 1]
+  //  return latitude;
 }
